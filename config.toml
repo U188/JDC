@@ -1,0 +1,30 @@
+#公告设置
+[app]
+	explain       = "扫码后请返回页面完成登录" #页面使用说明显示
+	path          = "QL/config/auth.json" #QL文件路径设置，一般无需更改
+    QLip          = "http://127.0.0.1" #青龙面板的ip，部署于一台服务器时不用更改
+    QLport        = "5700" #青龙面板的端口，默认为5700
+
+
+#web服务设置
+[server]
+	address        = ":5701" #端口号设置
+    serverRoot     = "public" #静态目录设置，请勿更改
+	serverAgent    = "JDCookie" #服务端UA
+
+#模板设置
+[viewer]
+Delimiters  =  ["${", "}"] #模板标签，请勿更改
+
+#cli工具设置
+[gfcli]
+    [gfcli.build]
+        name     = "JDC"
+        arch     = "amd64"
+        system   = "linux"
+        mod      = "none"
+        cgo      = 0
+        pack     = "public,template"
+        version  = "v1.0.0"
+        output   = "./bin"
+        extra    = ""

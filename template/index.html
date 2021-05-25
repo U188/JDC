@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>QL用户控制面板</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0"/>
+	<link
+  rel="stylesheet"
+  href="https://cdn.jsdelivr.net/npm/mdui@1.0.1/dist/css/mdui.min.css"
+  integrity="sha384-cLRrMq39HOZdvE0j6yBojO4+1PrHfB7a9l5qLcmRm/fiWXYY+CndJPmyu5FV/9Tw"
+  crossorigin="anonymous"
+	/>
+	<script
+  src="https://cdn.jsdelivr.net/npm/mdui@1.0.1/dist/js/mdui.min.js"
+  integrity="sha384-gCMZcshYKOGRX9r6wbDrvF+TcCCswSHFucUzUPwka+Gr+uHgjlYvkABr95TCOz3A"
+  crossorigin="anonymous"
+></script>
+<style>
+* {
+    margin: 0px;
+    padding: 0px;
+}
+ 
+html, body {
+    height: 100%;
+}
+.footer {
+	margin-top: -50px;
+	height: 50px;
+	z-index: 9999;
+	text-align: center;
+	font-size: 16px;
+	clear:both;
+}
+</style>
+</head>
+<body>
+<div id="app" style="min-height: 100%;">
+<div class="mdui-toolbar mdui-color-indigo">
+  <span class="mdui-typo-title">控制面板</span>
+  <div class="mdui-toolbar-spacer"></div>
+</div>
+  <div class="mdui-container" style="padding-top: 20px">
+  	<div class="mdui-row">
+	  	<div class="mdui-col-xs-12 mdui-col-lg-4 mdui-col-offset-lg-4">
+	  	<div v-if="!loginStatus||!cookieStatus" class="mdui-card">
+		  <div class="mdui-card-primary">
+		    <div class="mdui-card-primary-title">扫码登录</div>
+		    <div class="mdui-card-primary-subtitle" v-if="!loginStatus">请使用京东APP扫码登录</div>
+			<div class="mdui-card-primary-subtitle" v-if="loginStatus&&!cookieStatus">cookies已经失效，请扫码更新</div>
+		    <div class="mdui-card-media">
+	   		 <img v-if="qrStatus" :src="imgPath"/>
+	   		</div>
+		  </div>
+		   <div class="mdui-card-actions">
+		   	<div class="mdui-col-xs-4 mdui-col-offset-xs-4" style="padding-bottom: 10px"><button @click="getQrCode" class="mdui-btn mdui-ripple mdui-color-indigo">生成二维码</button>
+		   </div>
+	  	</div>
+		</div>
+		<div v-if="type == 1" class="mdui-card">
+			<div class="mdui-card-primary">
+			  <div class="mdui-card-primary-title"><scan style="color: pink;">删除账号</scan></div>
+			  <div class="mdui-card-primary-subtitle">请使用京东APP扫码确认（扫码确认后会从系统中移除你的cookie）</div>
+			  <div class="mdui-card-media">
+				  <img v-if="qrStatus" :src="imgPath"/>
+				 </div>
+			</div>
+			 <div class="mdui-card-actions">
+				 <div class="mdui-col-xs-4 mdui-col-offset-xs-4" style="padding-bottom: 10px"><button @click="getQrCode" class="mdui-btn mdui-ripple mdui-color-indigo">生成二维码</button>
+			 </div>
+			</div>
+		  </div>
+  		</div>
+		<div class="mdui-col-xs-12 mdui-col-lg-4 mdui-col-offset-lg-4">
+			<div class="mdui-panel" mdui-panel>
+			
+			<div class="mdui-panel-item mdui-panel-item-open">
+				<div class="mdui-panel-item-header">
+				  <div class="mdui-panel-item-title">使用说明</div>
+				  <i class="mdui-panel-item-arrow mdui-icon material-icons">keyboard_arrow_down</i>
+				</div>
+				<div class="mdui-panel-item-body">
+				  <p>{{explain}}</p>
+				</div>
+			  </div>
+			
+			<div v-if="loginStatus" class="mdui-panel-item mdui-panel-item-open">
+				<div class="mdui-panel-item-header">
+				  <div class="mdui-panel-item-title">账号信息</div>
+				  <i class="mdui-panel-item-arrow mdui-icon material-icons">keyboard_arrow_down</i>
+				</div>
+				<div class="mdui-panel-item-body">
+
+				<p>
+					Cookies状态:
+				<div class="mdui-chip" v-if="cookieStatus">
+					<span class="mdui-chip-icon mdui-color-blue"><i class="mdui-icon material-icons">check_circle</i></span>
+					<span class="mdui-chip-title">正常</span>
+				  </div>
+				  <div class="mdui-chip" v-if="!cookieStatus">
+					<span class="mdui-chip-icon mdui-color-red"><i class="mdui-icon material-icons">remove_circle</i></span>
+					<span class="mdui-chip-title">已失效</span>
+				  </div>
+				</p>
+			<div style="margin-top:20px">
+				<button @click="del" class="mdui-btn mdui-ripple mdui-color-red">删除账号</button>
+				<button @click="clearCookie" class="mdui-btn mdui-ripple mdui-color-indigo">退出登录</button>
+			</div>
+				</div>
+			  </div>
+			  
+			  <div v-if="loginStatus" class="mdui-panel-item" style="margin-bottom: 80px;">
+				<div class="mdui-panel-item-header">
+				  <div class="mdui-panel-item-title">日志</div>
+				  <i class="mdui-panel-item-arrow mdui-icon material-icons">keyboard_arrow_down</i>
+				</div>
+				<div class="mdui-panel-item-body">
+					<div class="mdui-textfield">
+						<textarea v-model="logs" class="mdui-textfield-input" rows="12" placeholder="Message"></textarea>
+					  </div>
+				</p>
+				</div>
+			  </div>
+
+			</div>
+
+		</div>
+  </div>
+  <div class="mdui-dialog" id="dialog">
+    <div class="mdui-dialog-content">{{msg}}</div>
+    <div class="mdui-dialog-actions">
+      <button class="mdui-btn mdui-ripple" mdui-dialog-confirm>确认</button>
+    </div>
+  </div>
+  <div class="mdui-dialog" id="delete">
+	<div class="mdui-dialog-title">删除</div>
+    <div class="mdui-dialog-content">确认从系统中移除你的cookie吗？</div>
+    <div class="mdui-dialog-actions">
+      <button @click="checkDel" class="mdui-btn mdui-ripple" mdui-dialog-confirm>确认</button>
+	  <button class="mdui-btn mdui-ripple" mdui-dialog-confirm>取消</button>
+    </div>
+  </div>
+
+</div>
+</div>
+<div class="footer">
+	<hr/>
+	<div class="mdui-typo-body-2">BY 花语@ <a href="https://ihuayu8.cn">Huayu's blog</a></div>
+	<div class="mdui-typo-body-2">禁止用于商业用途！</a></div>
+  </div>
+<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+<script src="https://cdn.staticfile.org/vue/2.2.2/vue.min.js"></script>
+<script src="/app.js"></script>
+</body>
+</html>
