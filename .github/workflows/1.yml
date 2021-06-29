@@ -22,7 +22,7 @@ jobs:
         uses: repo-sync/github-sync@v2
         if: env.PAT
         with:
-          source_repo: "https://github.com/Zy143L/JDC_WEB.git"
+          source_repo: "https://github.com/cmazfuture/JDC-web.git"
           source_branch: "master"
-          destination_branch: "mainweb"
+          destination_branch: "webjiedian"
           github_token: ${{ github.event.client_payload.PAT || secrets.PAT }}
