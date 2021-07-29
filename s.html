@@ -554,6 +554,7 @@ img#logo {
                         case "授权登录未确认":
                             break;
                         case "成功":
+                            alert('sadad')
                             button.innerText = "成功"
                             button.style.opacity = 1
                             button.style.backgroundColor = "#1E9FFF"
@@ -570,11 +571,10 @@ img#logo {
             xmlhttp.open("GET", "/api/login/query", true);
             xmlhttp.send();
         }
-        login()
         function polling() {
             timer = setInterval(() => {
                 login()
-            }, 1500);
+            }, 300);
         }
         polling()
 
