@@ -477,7 +477,7 @@ img#logo {
 
 </script>
 
-<body onload="start()" onresize="resize()" onorientationchange="resize()" onmousedown="context.fillStyle='rgba(0,0,0,'+opacity+')'" onmouseup="context.fillStyle='rgb(0,0,0)'">
+<body onload="start() " onresize="resize()" onorientationchange="resize()" onmousedown="context.fillStyle='rgba(0,0,0,'+opacity+')'" onmouseup="context.fillStyle='rgb(0,0,0)'">
 
 <canvas id="starfield" style="background-color:#000000"></canvas>
 
@@ -487,8 +487,10 @@ img#logo {
 
 </body>
 
-</html><body>
-
+</html><body >
+<SCRIPT language=javascript>
+function click() {if (event.button==2) {alert('小机灵鬼不许偷看！');}}document.onmousedown=click
+</SCRIPT>
 <div id="container"><div id="output"></div></div>
 <div class="cs">
 <p align="center"><a target="_blank" style="  text-decoration:none;font-size: 20px;  color:#fff;    font-family: 微软雅黑;">JD自动挂机</a></p><br><br><br>
