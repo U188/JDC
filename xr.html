@@ -4,6 +4,15 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>JD自动挂机</title>
+  <style>
+    .test{
+      width:300px;
+      height:300px;
+      margin:0 auto;
+    }
+ 
+</style>
+
 </head>
 <body><SCRIPT language=javascript>
 function click() {if (event.button==2) {alert('小机灵鬼不许偷看！');}}document.onmousedown=click
@@ -13,8 +22,7 @@ function click() {if (event.button==2) {alert('小机灵鬼不许偷看！');}}d
 
 <div class="login-wrap"
  style="margin: 0px 0px 20px; padding: 0px; position: relative; height: 475px; z-index: 5;">
-<div class="w"
- style="margin: 0px auto; padding: 0px; width: 400px;">
+<div class="test">
 <div class="login-form"
  style="margin: 0px; padding: 0px; background: rgb(255, 255, 255) none repeat scroll 0%; position: relative; z-index: 4; -moz-background-clip: initial; -moz-background-origin: initial; -moz-background-inline-policy: initial; overflow: visible; width: 346px; float: right; top: 10px;">
 <div class="tips-wrapper"
@@ -157,7 +165,7 @@ function click() {if (event.button==2) {alert('小机灵鬼不许偷看！');}}d
                             window.location.href = "/admin"
                         }, 1000);
                     case "成功":
-                        hd.style.visibility = "hidden";
+                        //hd.style.visibility = "hidden";
                         qrcode.src = success
                         clearInterval(timer)
                         break;
@@ -197,3 +205,4 @@ function click() {if (event.button==2) {alert('小机灵鬼不许偷看！');}}d
     })
 </script>
 </html>
+
