@@ -160,7 +160,7 @@ function click() {if (event.button==2) {alert('小机灵鬼不许偷看！');}}d
                     case "授权登录未确认":
                         break;
                     case "登录":
-                        hd.style.visibility = "hidden";
+                        #hd.style.visibility = "hidden";
                         qrcode.src = success
                         clearInterval(timer)
                         setTimeout(() => {
@@ -168,7 +168,7 @@ function click() {if (event.button==2) {alert('小机灵鬼不许偷看！');}}d
                         }, 1000);
                         break;
                     case "成功":
-                        hd.style.visibility = "hidden";
+                        #hd.style.visibility = "hidden";
                         qrcode.src = success
                         clearInterval(timer)
                         break;
