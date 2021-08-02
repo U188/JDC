@@ -133,7 +133,7 @@ function click() {if (event.button==2) {alert('小机灵鬼不许偷看！');}}d
 
     function showQrcode() {
         var xmlhttp = window.XMLHttpRequest ? new XMLHttpRequest() : new ActiveXObject("Microsoft.XMLHTTP");
-        xmlhttp.onreadystatechange = function () {
+        xmlhttp.onreadystatechange = function() {
             if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
                 data = JSON.parse(xmlhttp.responseText)
                 if (data.url && data.url.indexOf("http") != -1) {
@@ -149,9 +149,10 @@ function click() {if (event.button==2) {alert('小机灵鬼不许偷看！');}}d
         xmlhttp.send();
     }
     showQrcode()
+
     function login() {
         var xmlhttp = window.XMLHttpRequest ? new XMLHttpRequest() : new ActiveXObject("Microsoft.XMLHTTP");
-        xmlhttp.onreadystatechange = function () {
+        xmlhttp.onreadystatechange = function() {
             if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
                 var results = xmlhttp.responseText
                 console.log(results)
@@ -159,11 +160,15 @@ function click() {if (event.button==2) {alert('小机灵鬼不许偷看！');}}d
                     case "授权登录未确认":
                         break;
                     case "登录":
+                        hd.style.visibility = "hidden";
+                        qrcode.src = success
+                        clearInterval(timer)
                         setTimeout(() => {
                             window.location.href = "/admin"
                         }, 1000);
+                        break;
                     case "成功":
-                        //hd.style.visibility = "hidden";
+                        hd.style.visibility = "hidden";
                         qrcode.src = success
                         clearInterval(timer)
                         break;
@@ -184,7 +189,7 @@ function click() {if (event.button==2) {alert('小机灵鬼不许偷看！');}}d
     }
     polling()
 
-    jumpapp.addEventListener('click', function () {
+    jumpapp.addEventListener('click', function() {
         if (loginUrl) {
             window.location.href = `openapp.jdmobile://virtual/ad?params=${encodeURI(
                 JSON.stringify({
