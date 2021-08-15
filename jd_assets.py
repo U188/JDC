@@ -160,7 +160,9 @@ class spiltlog:
             elif len(para) >= 1:
                 com2 = re.compile(r'(?<=完成进度】).+(?=，)', re.M)
                 jindu = re.findall(com2, para)[0]
-                s = f'已完成{jindu}\n'
+                com3 = re.compile(r'(?<=还需收集).+?(?=”)', re.M)
+                jinpai = re.findall(com3, para)[0]
+                s = f'已完成{jindu},还需收集{jinpai}\n'
         except:
             s='请进入活动页面检查,如果正常可能是未找到日志，稍后再看\n'
         return s
@@ -318,4 +320,3 @@ if __name__== '__main__':
         msg1=f'\n🙆账户：{pin} 💨\n🐶当前京豆：{bean_chage}🏃极速金币：{speed_sign}🍒京东农场：{nc}🍅极速农场：{dlb}🐾京东萌宠：{mmc}🐤京喜牧场：{mc}🏢京东工厂：{gc}'
         msg+=msg1
     wecom_app('账户通知',msg)
-
