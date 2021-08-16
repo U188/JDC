@@ -262,7 +262,7 @@ class spiltlog:
             s = '未找到最近日志\n'
         return s
 
-    def jsparagraph(self, txt, pins, active):
+    def jkparagraph(self, txt, pins, active):
         try:
             for pin in pins:
                 if active:
@@ -404,7 +404,7 @@ if __name__== '__main__':
             if 'jd_dreamFactory' in p:
                 gc=spiltlog.gcparagraph(txt,pins,active)
             if 'jd_health' in p:
-                jk=spiltlog.gcparagraph(txt,pins,active)
+                jk=spiltlog.jkparagraph(txt,pins,active)
 
         msg1=f'\n🙆账户：{nackname} 💨\n🐶当前京豆：{bean_chage}🏃极速金币：{speed_sign}💊：{jk}🍒京东农场：{nc}🍅极速农场：{dlb}🐾京东萌宠：{mmc}🐤京喜牧场：{mc}🏢京东工厂：{gc}'
         msg+=msg1
