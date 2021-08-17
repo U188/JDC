@@ -287,7 +287,7 @@ class WeCom:
         respone = respone.json()
         return respone["errmsg"]
 def nowtime():
-    return datetime.datetime.now().strftime('%Y-%m-%d %H:%M:%S')
+    return datetime.now().strftime('%Y-%m-%d %H:%M:%S')
 if __name__== '__main__':
     logh = ['jd_fruit', 'jd_dreamFactory', 'jd_jxmc', 'jd_bean_change', 'jd_pet', 'jd_wsdlb', 'jd_speed_sign']
     getJDCookie=getJDCookie()
